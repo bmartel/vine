@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def user_not_authorized(exception)
-    message = exception.reason ? "pundit.errors.#{e.reason}" : exception.policy ? "#{exception.policy.class.to_s.underscore}.#{exception.query}" : e.message
+  def user_not_authorized(e)
+    message = e.try(:reason) ? "pundit.errors.#{e.reason}" : e.try(:policy) ? "#{e.policy.class.to_s.underscore}.#{e.query}" : e.message
 
     flash[:alert] = I18n.t(message, scope: "pundit", default: :default)
 
