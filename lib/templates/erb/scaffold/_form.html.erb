@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center w-full">
-  <%%= form_with(model: <%= model_resource_name %>, class: 'w-full max-w-sm px-4 sm:px-0') do |form| %>
+  <%%= form_with(model: <%= model_resource_name %>, class: 'w-full max-w-2xl px-4 sm:px-0') do |form| %>
   <% attributes.each do |attribute| -%>
     <div class="pb-5 mb-2 space-y-1">
   <% if attribute.password_digest? -%>

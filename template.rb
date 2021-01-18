@@ -29,10 +29,6 @@ def add_hotwire
   rails_command "hotwire:install"
 end
 
-def add_storage
-  rails_command "active_storage:install"
-end
-
 def add_action_text
   rails_command "action_text:install"
 end
@@ -174,7 +170,6 @@ add_gems
 after_bundle do
   stop_spring
   add_hotwire
-  add_storage
   add_action_text
   add_users
   add_npm_packages
