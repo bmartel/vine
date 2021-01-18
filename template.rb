@@ -100,6 +100,7 @@ def copy_templates
   copy_file "Dockerfile", force: true
   copy_file ".dockerignore", force: true
   copy_file "postcss.config.js", force: true
+  copy_file "tailwind.config.js", force: true
   copy_file ".prettierrc", force: true
   copy_file ".editorconfig", force: true
   copy_file "Procfile"
