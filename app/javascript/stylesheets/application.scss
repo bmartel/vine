@@ -1,0 +1,14 @@
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+.selected\:flex {
+  display: none;
+}
+.has-selected .selected\:flex,
+.is-selected .selected\:flex{
+  display: flex;
+}
+.required-dot::after {
+  content: '*';
+  @apply text-red-500 pl-1;
+}
+@import "~tailwindcss/utilities";

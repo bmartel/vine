@@ -1,0 +1,38 @@
+<div class="flex items-center justify-center w-full">
+  <%%= form_with(model: <%= model_resource_name %>, class: 'w-full max-w-sm px-4 sm:px-0') do |form| %>
+  <% attributes.each do |attribute| -%>
+    <div class="pb-5 mb-2 space-y-1">
+  <% if attribute.password_digest? -%>
+      <%%= form.label :password %>
+      <%%= form.password_field :password %>
+    </div>
+
+    <div class="pb-5 mb-2 space-y-1">
+      <%%= form.label :password_confirmation %>
+      <%%= form.password_field :password_confirmation %>
+  <% elsif attribute.attachments? -%>
+      <%%= form.label :<%= attribute.column_name %> %>
+      <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true %>
+  <% elsif attribute.field_type == :check_box or attribute.field_type == :radio_button -%>
+      <div class="relative flex items-center space-x-3">
+        <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+        <%%= form.label :<%= attribute.column_name %> %>
+      </div>
+  <% else -%>
+      <%%= form.label :<%= attribute.column_name %> %>
+      <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+  <% end -%>
+
+    <%% if !<%= singular_table_name %>.errors[:<%= attribute.column_name %>].empty? %>
+      <p class="absolute text-sm text-red-500" style="margin-top:0;">
+        <%%= <%= singular_table_name %>.errors[:<%= attribute.column_name %>].first %>
+      </p>
+    <%% end %>
+    </div>
+
+  <% end -%>
+    <div class="mt-6">
+      <%%= form.submit %>
+    </div>
+  <%% end %>
+</div>
