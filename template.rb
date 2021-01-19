@@ -25,6 +25,10 @@ def add_template_repository_to_source_path
   end
 end
 
+def stop_spring
+  run "spring stop"
+end
+
 def add_hotwire
   rails_command "hotwire:install"
 end
@@ -88,7 +92,6 @@ def add_users
 end
 
 def copy_templates
-  FileUtils.rm_rf(Dir['db/*']) # clear the generated db dir
   directory "app", force: true
   directory "config", force: true
   directory "lib", force: true
@@ -151,10 +154,6 @@ def add_multiple_authentication
 
     insert_into_file "config/initializers/devise.rb", "  " + template + "\n\n",
           before: "  # ==> Warden configuration"
-end
-
-def stop_spring
-  run "spring stop"
 end
 
 def setup_git_repository
