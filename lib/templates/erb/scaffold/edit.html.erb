@@ -1,10 +1,10 @@
-<div class="sticky top-0 z-10 flex items-center justify-center w-full mb-10 bg-white sm:mt-10">
+<div class="sticky top-0 z-10 flex items-center justify-center w-full mb-10 bg-white border-b sm:mt-10">
   <div class="flex items-center justify-between flex-1 max-w-2xl px-4 py-3 sm:py-4 sm:px-0">
-    <%%= link_to <%= index_helper %>_path, class: "transition ease-out duration-150 p-2 mt-1 rounded-full bg-white hover:bg-gray-200 mr-2 flex items-center justify-center sm:-ml-12" do %>
+    <%%= link_to <%= index_helper %>_path, class: "transition ease-out duration-150 p-2 mt-1 rounded-full bg-white hover:bg-gray-200 mr-2 flex items-center justify-center" do %>
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
     <%% end %>
     <h1 class="text-2xl font-bold sm:text-4xl">Editing <%= singular_table_name.titleize %></h1>
-    <%%= link_to @<%= singular_table_name %>, class: "transition ease-out duration-150 p-2 mt-1 rounded-full bg-white hover:bg-gray-200 flex items-center justify-center ml-2 sm:-mr-12" do %>
+    <%%= link_to @<%= singular_table_name %>, class: "transition ease-out duration-150 p-2 mt-1 rounded-full bg-white hover:bg-gray-200 flex items-center justify-center ml-2" do %>
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
     <%% end %>
   </div>

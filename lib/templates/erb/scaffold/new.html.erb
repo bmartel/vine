@@ -1,10 +1,10 @@
-<div class="sticky top-0 z-10 flex items-center justify-center w-full mb-10 bg-white sm:mt-10">
+<div class="sticky top-0 z-10 flex items-center justify-center w-full mb-10 bg-white border-b sm:mt-10">
   <div class="flex items-center justify-between flex-1 max-w-2xl px-4 py-3 sm:py-4 sm:px-0">
-    <%%= link_to <%= index_helper %>_path, class: "transition ease-out duration-150 p-2 mt-1 rounded-full bg-white hover:bg-gray-200 mr-2 flex items-center justify-center sm:-ml-12"  do %>
+    <%%= link_to <%= index_helper %>_path, class: "transition ease-out duration-150 p-2 mt-1 rounded-full bg-white hover:bg-gray-200 mr-2 flex items-center justify-center"  do %>
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
     <%% end %>
     <h1 class="text-2xl font-bold sm:text-4xl">New <%= singular_table_name.titleize %></h1>
-    <span class="w-10 h-10 mt-1 ml-2 pointer-events-none sm:-mr-12" aria-hidden="true" />
+    <span class="w-10 h-10 mt-1 ml-2 pointer-events-none" aria-hidden="true" />
   </div>
 </div>
 
