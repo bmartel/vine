@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def user_not_authorized(e)
     message = e.try(:reason) ? "pundit.errors.#{e.reason}" : e.try(:policy) ? "#{e.policy.class.to_s.underscore}.#{e.query}" : e.message
 
-    flash[:alert] = I18n.t(message, scope: "pundit", default: :default)
+    flash[:alert] = I18n.t(message, scope: "pundit", default: e.message)
 
     redirect_to(request.referrer || root_path)
   end

@@ -103,11 +103,11 @@ class FormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def check_box(method, options = {}, checked_value = nil, unchecked_value = nil)
+  def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")
     super(method, merge_class(CHECK_BOX_CLASS, options), checked_value, unchecked_value)
   end
 
-  def switch_toggle(method, options = {}, checked_value = nil, unchecked_value = nil)
+  def switch_toggle(method, options = {}, checked_value = "1", unchecked_value = "0")
     @template.content_tag(:div,
                           @template.check_box(@object_name, method, merge_class(SWITCH_TOGGLE_CLASS, options), checked_value, unchecked_value),
                           { class: SWITCH_TOGGLE_WRAPPER_CLASS }
