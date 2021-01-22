@@ -115,6 +115,7 @@ def add_gems
   gem 'hotwire-rails'
   gem "view_component", require: "view_component/engine"
   gem 'image_processing'
+  gem 'pagy'
   gem 'pundit'
   gem 'devise'
   gem 'devise_invitable'

@@ -5,11 +5,12 @@ require_dependency "<%= namespaced_path %>/application_controller"
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
   # before_action :authenticate_user!
+  include Pagy::Backend
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
   # GET <%= route_url %>
   def index
-    @<%= plural_table_name %> = policy_scope <%= orm_class.all(class_name) %>
+    @pagy, @<%= plural_table_name %> = pagy policy_scope(<%= orm_class.all(class_name) %>)
   end
 
   # GET <%= route_url %>/1
