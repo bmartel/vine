@@ -14,7 +14,7 @@
       <%%= form.label :<%= attribute.column_name %> %>
       <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true %>
   <% elsif attribute.field_type == :check_box or attribute.field_type == :radio_button -%>
-      <div class="relative flex items-center space-x-3">
+      <div class="relative flex items-center">
         <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> %>
         <%%= form.label :<%= attribute.column_name %> %>
       </div>
