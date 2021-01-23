@@ -5,7 +5,7 @@ module Users
 
     attr_reader :service, :user
 
-    def google
+    def google_oauth2
       handle_auth "Google"
     end
 

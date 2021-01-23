@@ -1,0 +1,13 @@
+<%- if devise_mapping.omniauthable? %>
+  <div class="flex flex-col space-y-3">
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to "Continue with #{provider == :google_oauth2 ? "Google" : OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "px-4 py-2 text-base font-semibold text-center text-gray-700 bg-gray-50 rounded-md hover:bg-gray-100 focus:ring-purple-500 focus:ring-offset-purple-200 transition ease-in duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer" %>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col items-center py-4 mt-4">
+    <div class="w-full border-b">
+    </div>
+    <span class="px-2 py-1 -mt-4 text-sm bg-white">or</span>
+  </div>
+<% end %>

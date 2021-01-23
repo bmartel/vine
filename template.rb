@@ -137,7 +137,7 @@ def add_multiple_authentication
 
     template = """
   if Rails.application.credentials.google_app_id.present? && Rails.application.credentials.google_app_secret.present?
-    config.omniauth :google, Rails.application.credentials.google_app_id, Rails.application.credentials.google_app_secret
+    config.omniauth :google_oauth2, Rails.application.credentials.google_app_id, Rails.application.credentials.google_app_secret
   end
 
   if Rails.application.credentials.facebook_app_id.present? && Rails.application.credentials.facebook_app_secret.present?
