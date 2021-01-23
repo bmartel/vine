@@ -1,0 +1,41 @@
+<% if user_masquerade? %>
+  <div class="sticky top-0 z-10 flex items-center justify-center w-full bg-yellow-50">
+    <div class="flex items-center flex-1 px-4 py-3 text-yellow-900 sm:py-4 sm:px-0 sm:gap-6 max-w-7xl">
+      <div class="flex items-center flex-1 gap-4">
+        <svg class="w-6 h-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+        </svg>
+        <span>You're logged in as <b><%= current_user.name %> (<%= current_user.email %>)</b></span>
+      </div>
+
+      <%= link_to back_masquerade_path(current_user), class: "transition ease-out duration-150 p-2 mt-1 rounded-full hover:bg-yellow-100 flex items-center justify-center ml-2" do %>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        Logout
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<nav class="sticky top-0 z-10 flex items-center justify-between w-full px-4 py-3 bg-white">
+  <%= link_to "/", class: "flex items-center" do %>
+    <span class="text-lg font-bold text-gray-700">
+      App
+    </span>
+  <% end %>
+  <ul class="flex items-center space-x-6">
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "" %>
+      </li>
+      <li>
+        <%= link_to edit_user_registration_path, class: "" do %>
+          <%= image_tag current_user.avatar, class: "h-8 w-8 rounded-full object-contain" %>
+        <% end %>
+      </li>
+    <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path, class: "" %></li>
+      <li><%= link_to "Log in", new_user_session_path, class: "" %></li>
+    <% end %>
+  </ul>
+</nav>
+
