@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
@@ -14,5 +15,9 @@ class ApplicationController < ActionController::Base
     flash[:alert] = I18n.t(message, scope: "pundit", default: e.message)
 
     redirect_to(request.referrer || root_path)
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:image])
   end
 end
