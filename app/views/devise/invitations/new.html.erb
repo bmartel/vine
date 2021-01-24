@@ -1,14 +1,16 @@
-<div class="flex justify-center w-full mt-8 sm:mt-16 sm:items-center">
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex justify-center w-full my-8 sm:mt-16 sm:items-center">
   <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post, class: 'flex justify-center flex-1 w-full' }) do |f| %>
     <div class="flex-1 overflow-hidden border-b sm:max-w-xs sm:border sm:rounded-lg">
       <div class="px-6">
         <h2 class="my-6 text-xl font-bold text-center"><%= t "devise.invitations.new.header" %></h2>
 
+        <%= render "devise/shared/error_messages", resource: resource %>
+
         <% resource.class.invite_key_fields.each do |field| -%>
           <div class="mb-3 space-y-1">
             <%= f.label field %><br />
             <%= f.text_field field %>
+            <%= render "devise/shared/field_error", resource: resource, field: field %>
           </div>
         <% end -%>
       </div>

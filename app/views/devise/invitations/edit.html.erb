@@ -1,20 +1,23 @@
-<div class="flex justify-center w-full mt-8 sm:mt-16 sm:items-center">
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex justify-center w-full my-8 sm:mt-16 sm:items-center">
   <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put, class: 'flex justify-center flex-1 w-full' }) do |f| %>
     <div class="flex-1 overflow-hidden border-b sm:max-w-xs sm:border sm:rounded-lg">
       <%= f.hidden_field :invitation_token, readonly: true %>
       <div class="px-6">
         <h2 class="my-6 text-xl font-bold text-center"><%= t "devise.invitations.edit.header" %></h2>
 
+        <%= render "devise/shared/error_messages", resource: resource %>
+
         <% if f.object.class.require_password_on_accepting %>
           <div class="mb-3 space-y-1">
             <%= f.label :password %><br />
             <%= f.password_field :password %>
+            <%= render "devise/shared/field_error", resource: resource, field: :password %>
           </div>
 
           <div class="mb-3 space-y-1">
             <%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation %>
+            <%= render "devise/shared/field_error", resource: resource, field: :password_confirmation %>
           </div>
         <% end %>
       </div>

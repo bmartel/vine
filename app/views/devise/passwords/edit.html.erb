@@ -1,10 +1,11 @@
-<div class="flex justify-center w-full mt-8 sm:mt-16 sm:items-center">
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex justify-center w-full my-8 sm:mt-16 sm:items-center">
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'flex justify-center flex-1 w-full' }) do |f| %>
     <%= f.hidden_field :reset_password_token %>
     <div class="flex-1 overflow-hidden border-b sm:max-w-xs sm:border sm:rounded-lg">
       <div class="px-6">
         <h2 class="my-6 text-xl font-bold text-center">Change your password</h2>
+
+        <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="mb-3 space-y-1">
           <%= f.label :password, "New password" %><br />
@@ -12,11 +13,13 @@
             <em class="text-xs">(<%= @minimum_password_length %> characters minimum)</em><br />
           <% end %>
           <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+          <%= render "devise/shared/field_error", resource: resource, field: :password %>
         </div>
 
         <div class="mb-3 space-y-1">
           <%= f.label :password_confirmation, "Confirm new password" %><br />
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <%= render "devise/shared/field_error", resource: resource, field: :password_confirmation %>
         </div>
       </div>
 

@@ -1,5 +1,4 @@
-<div class="flex justify-center w-full mt-8 sm:mt-16 sm:items-center">
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex justify-center w-full my-8 sm:mt-16 sm:items-center">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'flex justify-center flex-1 w-full'}) do |f| %>
     <div class="flex-1 overflow-hidden border-b sm:max-w-xs sm:border sm:rounded-lg">
       <div class="px-6">
@@ -7,9 +6,12 @@
 
         <%= render 'devise/shared/omniauth_links' %>
 
+        <%= render "devise/shared/error_messages", resource: resource %>
+
         <div class="mb-3 space-y-1">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= render "devise/shared/field_error", resource: resource, field: :email %>
         </div>
 
         <div class="mb-3 space-y-1">
@@ -18,11 +20,13 @@
           <em class="text-xs">(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
           <%= f.password_field :password, autocomplete: "new-password" %>
+          <%= render "devise/shared/field_error", resource: resource, field: :password %>
         </div>
 
         <div class="mb-3 space-y-1">
           <%= f.label :password_confirmation %><br />
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <%= render "devise/shared/field_error", resource: resource, field: :password_confirmation %>
         </div>
       </div>
 

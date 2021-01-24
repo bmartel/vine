@@ -1,14 +1,15 @@
-<div class="flex justify-center w-full mt-8 sm:mt-16 sm:items-center">
-  <%= render "devise/shared/error_messages", resource: resource %>
-
+<div class="flex justify-center w-full my-8 sm:mt-16 sm:items-center">
   <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'flex justify-center flex-1 w-full' }) do |f| %>
     <div class="flex-1 overflow-hidden border-b sm:max-w-xs sm:border sm:rounded-lg">
       <div class="px-6">
         <h2 class="my-6 text-xl font-bold text-center">Resend unlock instructions</h2>
 
+        <%= render "devise/shared/error_messages", resource: resource %>
+
         <div class="mb-3 space-y-1">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= render "devise/shared/field_error", resource: resource, field: :email %>
         </div>
       </div>
 

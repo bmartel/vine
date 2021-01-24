@@ -1,0 +1,5 @@
+<% if !resource.errors[field].empty? %>
+  <p class="text-sm text-red-500">
+    <%= resource.errors[field].first %>
+  </p>
+<% end %>

@@ -134,8 +134,50 @@ end
 
 def add_multiple_authentication
     generate "model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text"
+    turbo_devise_template = """
+  class TurboFailureApp < Devise::FailureApp
+    def respond
+      if request_format == :turbo_stream
+        redirect
+      else
+        super
+      end
+    end
+
+    def skip_format?
+      %w(html turbo_stream */*).include? request_format.to_s
+    end
+  end
+
+  class TurboController < ApplicationController
+    class Responder < ActionController::Responder
+      def to_turbo_stream
+        controller.render(options.merge(formats: :html))
+      rescue ActionView::MissingTemplate => error
+        if get?
+          raise error
+        elsif has_errors? && default_action
+          render rendering_options.merge(formats: :html, status: :unprocessable_entity)
+        else
+          redirect_to navigation_location
+        end
+      end
+    end
+
+    self.responder = Responder
+    respond_to :html, :turbo_stream
+  end
+    """.strip
+
+    insert_into_file "config/initializers/devise.rb", "  " + turbo_devise_template + "\n\n",
+          after: "# frozen_string_literal: true"
 
     template = """
+  config.parent_controller = 'TurboController'
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  end
+
   if Rails.application.credentials.google_app_id.present? && Rails.application.credentials.google_app_secret.present?
     config.omniauth :google_oauth2, Rails.application.credentials.google_app_id, Rails.application.credentials.google_app_secret
   end
@@ -151,6 +193,8 @@ def add_multiple_authentication
   if Rails.application.credentials.github_app_id.present? && Rails.application.credentials.github_app_secret.present?
     config.omniauth :github, Rails.application.credentials.github_app_id, Rails.application.credentials.github_app_secret
   end
+
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
     """.strip
 
     insert_into_file "config/initializers/devise.rb", "  " + template + "\n\n",
