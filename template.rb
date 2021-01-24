@@ -135,41 +135,41 @@ end
 def add_multiple_authentication
     generate "model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text"
     turbo_devise_template = """
-  class TurboFailureApp < Devise::FailureApp
-    def respond
-      if request_format == :turbo_stream
-        redirect
+class TurboFailureApp < Devise::FailureApp
+  def respond
+    if request_format == :turbo_stream
+      redirect
+    else
+      super
+    end
+  end
+
+  def skip_format?
+    %w(html turbo_stream */*).include? request_format.to_s
+  end
+end
+
+class TurboController < ApplicationController
+  class Responder < ActionController::Responder
+    def to_turbo_stream
+      controller.render(options.merge(formats: :html))
+    rescue ActionView::MissingTemplate => error
+      if get?
+        raise error
+      elsif has_errors? && default_action
+        render rendering_options.merge(formats: :html, status: :unprocessable_entity)
       else
-        super
+        redirect_to navigation_location
       end
-    end
-
-    def skip_format?
-      %w(html turbo_stream */*).include? request_format.to_s
     end
   end
 
-  class TurboController < ApplicationController
-    class Responder < ActionController::Responder
-      def to_turbo_stream
-        controller.render(options.merge(formats: :html))
-      rescue ActionView::MissingTemplate => error
-        if get?
-          raise error
-        elsif has_errors? && default_action
-          render rendering_options.merge(formats: :html, status: :unprocessable_entity)
-        else
-          redirect_to navigation_location
-        end
-      end
-    end
-
-    self.responder = Responder
-    respond_to :html, :turbo_stream
-  end
+  self.responder = Responder
+  respond_to :html, :turbo_stream
+end
     """.strip
 
-    insert_into_file "config/initializers/devise.rb", "  " + turbo_devise_template + "\n\n",
+    insert_into_file "config/initializers/devise.rb", "\n\n" + turbo_devise_template + "\n\n",
           after: "# frozen_string_literal: true"
 
     template = """
