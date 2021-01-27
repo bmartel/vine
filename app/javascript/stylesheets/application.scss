@@ -11,6 +11,9 @@
   content: '*';
   @apply text-red-500 pl-1;
 }
+trix-editor, trix-toolbar {
+  display: none;
+}
 .trix-editor-placeholder {
   display: block;
   height: theme('height.64');
@@ -25,6 +28,10 @@
   height: 32px;
 }
 .rich-text--ready {
+  & trix-editor,
+  & trix-toolbar {
+    display: block;
+  }
   & .trix-editor-placeholder,
   & .trix-toolbar-placeholder {
     display: none;
