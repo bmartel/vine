@@ -11,4 +11,23 @@
   content: '*';
   @apply text-red-500 pl-1;
 }
+.trix-editor-placeholder {
+  display: block;
+  height: theme('height.64');
+  background-color: theme('colors.gray.50');
+  line-height: 1.5;
+  outline: none;
+  margin: 0;
+}
+.trix-toolbar-placeholder {
+  display: block;
+  background-color: theme('colors.gray.50');
+  height: 32px;
+}
+.rich-text--ready {
+  & .trix-editor-placeholder,
+  & .trix-toolbar-placeholder {
+    display: none;
+  }
+}
 @import "~tailwindcss/utilities";

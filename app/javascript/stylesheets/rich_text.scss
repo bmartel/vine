@@ -5,6 +5,10 @@ trix-editor {
   padding: theme('spacing.2') theme('spacing.4') !important;
   border-color: theme('colors.gray.300') !important;
   border-radius: theme('borderRadius.lg') !important;
+  min-height: theme('height.64') !important;
+  &:focus {
+    border-color: transparent !important;
+  }
   ul {
     list-style: disc;
   }
@@ -15,20 +19,20 @@ trix-editor {
 trix-toolbar {
   position: sticky;
   top: 0;
-}
-trix-toolbar .trix-button {
-  color: theme('colors.gray.700') !important;
-}
-trix-toolbar .trix-button-group {
-  border-color: theme('colors.gray.300') !important;
-  border-radius: theme('borderRadius.md') !important;
-  margin-bottom: theme('margin.1') !important;
-}
-trix-toolbar .trix-button.trix-active {
-  background: theme('colors.purple.200') !important;
-}
-trix-toolbar .trix-button:not(:first-child) {
-  border-left: 1px solid theme('colors.gray.300') !important;
+  .trix-button {
+    color: theme('colors.gray.700') !important;
+  }
+  .trix-button-group {
+    border-color: theme('colors.gray.300') !important;
+    border-radius: theme('borderRadius.md') !important;
+    margin-bottom: theme('margin.1') !important;
+  }
+  .trix-button.trix-active {
+    background: theme('colors.purple.200') !important;
+  }
+  .trix-button:not(:first-child) {
+    border-left: 1px solid theme('colors.gray.300') !important;
+  }
 }
 @import "~trix";
 
